@@ -11,22 +11,25 @@ class App extends Component {
         postData: []
       }
     }
-    componentDidMount(){
-      axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response=>{
-        this.setState({
-          postData: response.data
-        })
-        console.log(response.data)
-      })
-    }
+     componentDidMount(){
+       axios.get('https://jsonplaceholder.typicode.com/posts')
+       .then(response=>{
+         this.setState({
+           postData: response.data
+         })
+         console.log(response.data)
+       })
+     }
 
    
   render() {
+    const {postData} = this.state
     return (
       <div>
-
         <PostList />
+        {postData.map(post=>{
+          return(<div key={post.id}>{post.title}</div>)
+        })}
       </div>
     )
   }
